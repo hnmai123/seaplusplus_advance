@@ -7,11 +7,6 @@
 #include "InputHelper.h"
 
 using namespace std;
-string toLower(const string& str) {
-    string lowerStr = str;
-    transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(), ::tolower);
-    return lowerStr;
-}
 
 App::App() {
     engine = new SeaPlusPlusEngine("regulation/vertebrate_rules.csv", "regulation/invertebrate_rules.csv");
@@ -48,10 +43,8 @@ void App::run() {
             cout << "✅ Catch added to your bag!" << endl;
             displayCatchData(creature);
             displayResult(engine->checkCatch(creature));
-            cout << "=======================================" << endl;
         } else if (choice == 2) {
             checkBag(); // Check the bag for valid catches
-            cout << "=======================================" << endl;
         } else if (choice == 3) {
             displayGoodbye();
             break; // Exit the loop
@@ -79,10 +72,8 @@ SeaCreature* App::getCatchData() {
     if (type == "vertebrate") {
         creature = new VertebrateCreature(specie, size, quantity);
     } else if (type == "invertebrate") {
-        char eggChoice;
         cout << "\n🔸🔸🔸 Invertebrate Details 🔸🔸🔸\n";
-        eggChoice = readYesNo("🥚 Has eggs? (y/n): ");        
-        bool hasEggs = (eggChoice== 'y' || eggChoice == 'Y');
+        bool hasEggs = readYesNo("🥚 Has eggs?");        
         creature = new InvertebrateCreature(specie, size, quantity, hasEggs);
     } else {
         cout << "\n==============================\n";
@@ -91,7 +82,6 @@ SeaCreature* App::getCatchData() {
         cout << "==============================\n";        
         creature = new VertebrateCreature(specie, size, quantity);
     }
-
     return creature;
 }
 

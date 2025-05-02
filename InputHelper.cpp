@@ -1,8 +1,15 @@
 #include "InputHelper.h"
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 using namespace std;
+
+string toLower(const string& str) {
+    string lowerStr = str;
+    transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(), ::tolower);
+    return lowerStr;
+}
 
 float readFloat(const string& prompt) {
     string input;
@@ -52,10 +59,10 @@ bool readYesNo(const string& prompt) {
     while (true) {
         cout << prompt << " (y/n): ";
         getline(cin, input);
-        if (input == "y" || input == "Y" || input == "yes" || input == "Yes") {
+        if (toLower(input) == "y" || toLower(input) == "yes") {
             // Check if the input is 'y', 'Y', 'yes', or 'Yes'
             return true;
-        } else if (input == "n" || input == "N" || input == "no" || input == "No") {
+        } else if (toLower(input) == "n" || input == "N" || toLower(input) == "no") {
             return false;
         } else {
             cout << "❌ Invalid input. Please enter 'y/yes' or 'n/no'." << endl;

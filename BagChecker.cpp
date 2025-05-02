@@ -16,6 +16,7 @@ void BagChecker::checkBag(const Bag* bag) const {
     int failedChecks = 0;
 
     for (const SeaCreature* creature : bag->getCreatures()) {
+        cout << "----------------------------------------" << endl;
         cout << "\n🔍 Checking: " << creature->getSpecie() << endl;
         bool result = engine->checkCatch(creature);
 
@@ -28,7 +29,7 @@ void BagChecker::checkBag(const Bag* bag) const {
             passedChecks++;
         }
     }
-
+    cout << "----------------------------------------" << endl;
     cout << "\n📦 Bag Summary" << endl;
     cout << "----------------------------------------" << endl;
     cout << "✅ Valid creatures : " << passedChecks << endl;
@@ -44,6 +45,5 @@ void BagChecker::checkBag(const Bag* bag) const {
         cout << "⚠️  Some creatures in the bag did not pass rule checks." << endl;
         cout << "🔁 Please release any invalid catches." << endl;    
     }
-
     cout << "----------------------------------------" << endl;
 }
