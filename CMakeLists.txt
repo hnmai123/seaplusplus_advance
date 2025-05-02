@@ -19,6 +19,7 @@ set(SOURCES
     VertebrateCreature.cpp
     Bag.cpp
     BagChecker.cpp
+    InputHelper.cpp
 )
 
 # Header files
@@ -35,6 +36,7 @@ set(HEADERS
     VertebrateCreature.h
     Bag.h
     BagChecker.h
+    InputHelper.h
 )
 
 # Create executable

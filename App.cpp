@@ -4,6 +4,7 @@
 #include "InvertebrateCreature.h"
 #include <algorithm>
 #include "BagChecker.h"
+#include "InputHelper.h"
 
 using namespace std;
 string toLower(const string& str) {
@@ -27,8 +28,7 @@ App::~App() {
 void App::run() {
     cout << "\n🌊 Welcome to Sea++!\n=======================================" << endl;
     string name;    
-    cout << "👤 Enter your name: ";
-    getline(cin, name);
+    name = readString("👤 Enter your name: ");
     cout << endl;
     angler = new Angler(name);
     angler->greet();
@@ -39,11 +39,7 @@ void App::run() {
         cout << "1️⃣ Add a new catch" << endl;
         cout << "2️⃣ Check your bag" << endl;
         cout << "3️⃣ Exit" << endl;
-        cout << "🔍 Choose an option: ";
-
-        int choice;
-        cin >> choice;
-        cin.ignore(); // Clear the newline character from the input buffer
+        int choice = readInt("🔍 Choose an option: ");
         cout << "=======================================" << endl;
 
         if (choice == 1) {
@@ -61,12 +57,9 @@ void App::run() {
             break; // Exit the loop
         } else {
             cout << "⚠️ Invalid choice. Please try again." << endl;
+            break;
         }
     }
-    
-    delete angler; // Clean up the angler object
-    delete engine; // Clean up the engine object
-    delete bagChecker; // Clean up the bagChecker object
 }
 
 SeaCreature* App::getCatchData() {
@@ -75,15 +68,10 @@ SeaCreature* App::getCatchData() {
     int quantity;
     cout << "🐠 Please enter details about your sea creature\n";
     cout << "-------------------------------------------------\n";
-    cout << "🌊 Type (Vertebrate / Invertebrate): ";
-    getline(cin, type);
-    type = toLower(type);  // Normalize to lowercase
-    cout << "🔖 Species name: ";
-    getline(cin, specie);
-    cout << "📏 Size (in cm): ";
-    cin >> size;
-    cout << "🔢 Quantity caught: ";
-    cin >> quantity;
+    type = toLower(readString("🌊 Type (Vertebrate / Invertebrate): "));
+    specie = readString("🔖 Species name: ");
+    size = readFloat("📏 Size (in cm): ");
+    quantity = readInt("🔢 Quantity caught: ");
     cout << "-------------------------------------------------\n";
 
     // Create a new SeaCreature object based on the type
@@ -93,8 +81,7 @@ SeaCreature* App::getCatchData() {
     } else if (type == "invertebrate") {
         char eggChoice;
         cout << "\n🔸🔸🔸 Invertebrate Details 🔸🔸🔸\n";
-        cout << "🥚 Has eggs? (y/n): ";        
-        cin >> eggChoice;
+        eggChoice = readYesNo("🥚 Has eggs? (y/n): ");        
         bool hasEggs = (eggChoice== 'y' || eggChoice == 'Y');
         creature = new InvertebrateCreature(specie, size, quantity, hasEggs);
     } else {
