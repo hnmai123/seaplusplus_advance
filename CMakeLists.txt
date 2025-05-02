@@ -17,6 +17,8 @@ set(SOURCES
     SeaPlusPlusEngine.cpp
     VertebrateChecker.cpp
     VertebrateCreature.cpp
+    Bag.cpp
+    BagChecker.cpp
 )
 
 # Header files
@@ -31,6 +33,8 @@ set(HEADERS
     SeaPlusPlusEngine.h
     VertebrateChecker.h
     VertebrateCreature.h
+    Bag.h
+    BagChecker.h
 )
 
 # Create executable

@@ -3,6 +3,7 @@
 #include "VertebrateCreature.h"
 #include "InvertebrateCreature.h"
 #include <algorithm>
+#include "BagChecker.h"
 
 using namespace std;
 string toLower(const string& str) {
@@ -14,29 +15,58 @@ string toLower(const string& str) {
 App::App() {
     engine = new SeaPlusPlusEngine("regulation/vertebrate_rules.csv", "regulation/invertebrate_rules.csv");
     angler = nullptr;
+    bagChecker = new BagChecker("regulation/vertebrate_rules.csv", "regulation/invertebrate_rules.csv");
 }
 
 App::~App() {
     delete engine;
     delete angler;
+    delete  bagChecker;
 }
 
 void App::run() {
-    cout << "\n🌊 Welcome to Sea++!\n=======================================\n" << endl;
+    cout << "\n🌊 Welcome to Sea++!\n=======================================" << endl;
     string name;    
     cout << "👤 Enter your name: ";
     getline(cin, name);
     cout << endl;
     angler = new Angler(name);
     angler->greet();
+    cout << "\n🎣 Let's check your bag!" << endl;
+    
+    while (true) {
+        cout << "\n 🎣 Menu: " << endl;
+        cout << "1️⃣ Add a new catch" << endl;
+        cout << "2️⃣ Check your bag" << endl;
+        cout << "3️⃣ Exit" << endl;
+        cout << "🔍 Choose an option: ";
 
-    SeaCreature* creature = getCatchData();
-    bool result = engine->checkCatch(creature);
-    displayCatchData(creature);
-    displayResult(result);
+        int choice;
+        cin >> choice;
+        cin.ignore(); // Clear the newline character from the input buffer
+        cout << "=======================================" << endl;
 
-    delete creature; // Clean up the creature object
-    displayGoodbye();
+        if (choice == 1) {
+            SeaCreature* creature = getCatchData();
+            angler->getBag().addCreature(creature);
+            cout << "✅ Catch added to your bag!" << endl;
+            displayCatchData(creature);
+            displayResult(engine->checkCatch(creature));
+            cout << "=======================================" << endl;
+        } else if (choice == 2) {
+            checkBag(); // Check the bag for valid catches
+            cout << "=======================================" << endl;
+        } else if (choice == 3) {
+            displayGoodbye();
+            break; // Exit the loop
+        } else {
+            cout << "⚠️ Invalid choice. Please try again." << endl;
+        }
+    }
+    
+    delete angler; // Clean up the angler object
+    delete engine; // Clean up the engine object
+    delete bagChecker; // Clean up the bagChecker object
 }
 
 SeaCreature* App::getCatchData() {
@@ -94,9 +124,9 @@ void App::displayCatchData(SeaCreature* creature) {
 
 void App::displayResult(bool result) {
     if (result) {
-        cout << "\n✅ You can keep the catch!\n" << endl;
+        cout << "\n✅ You can keep the catch!" << endl;
     } else {
-        cout << "\n❌ You must release the catch back to nature!\n" << endl;
+        cout << "\n❌ You must release the catch back to nature!" << endl;
     }
 }
 
@@ -105,5 +135,10 @@ void App::displayGoodbye() {
     cout << "🎣 Thank you for using Sea++!\n";
     cout << "💧 Respect the ocean. Fish responsibly.\n";
     cout << "👋 Goodbye, and tight lines!\n";
-    cout << "=======================================\n" << endl;
+    cout << "=======================================" << endl;
+}
+
+void App::checkBag() {
+    cout << "\n🔎 Checking entire bag...\n";
+    bagChecker->checkBag(&angler->getBag());
 }

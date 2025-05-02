@@ -9,6 +9,14 @@ string Angler::getName() const {
 }
 
 void Angler::greet() const {
-    cout << "Hello " << name << "! 🎣 Let's check your catch!\n" << endl;
-    cout << "=======================================\n" << endl;
+    cout << "Hello " << name << "! 🎣 Let's get fishing!" << endl;
+    cout << "=======================================" << endl;
+}
+
+Bag& Angler::getBag() {
+    return bag; // Return a reference to the bag
+}
+
+const Bag& Angler::getBag() const {
+    return bag; // Return a const reference to the bag
 }

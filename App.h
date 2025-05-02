@@ -4,11 +4,13 @@
 #include "Angler.h"
 #include "SeaCreature.h"
 #include "SeaPlusPlusEngine.h"
+#include "BagChecker.h"
 
 class App {
     private:
         SeaPlusPlusEngine* engine;
         Angler* angler;
+        BagChecker* bagChecker;
     public:
         App();
         ~App();
@@ -18,6 +20,7 @@ class App {
         void displayCatchData(SeaCreature* creature); // Display catch data
         void displayResult(bool result); // Display result of the catch (can keep or release)
         void displayGoodbye(); // Display goodbye message
+        void checkBag(); // Check the bag for valid catches
 };
 
 #endif // APP_H
