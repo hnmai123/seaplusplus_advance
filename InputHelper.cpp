@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <regex>
 
 using namespace std;
 
@@ -68,4 +69,21 @@ bool readYesNo(const string& prompt) {
             cout << "❌ Invalid input. Please enter 'y/yes' or 'n/no'." << endl;
         }
     }
+}
+
+string readFileName(const string& prompt, const string& pattern) {
+    regex regexPattern(pattern);
+    string filename;
+
+    while (true) {
+        cout << prompt;
+        getline(cin, filename);
+        // Check if the filename matches the regex pattern
+        if (regex_match(filename, regexPattern)) {
+            return filename;
+        } else {
+            cout << "❌ Invalid filename. Please enter a valid filename ending with .csv (e.g. 'filename.csv')." << endl;
+        }
+    }
+
 }

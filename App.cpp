@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "BagChecker.h"
 #include "InputHelper.h"
+#include <fstream>
 
 using namespace std;
 
@@ -33,7 +34,10 @@ void App::run() {
         cout << "\n 🎣 Menu: " << endl;
         cout << "1️⃣ Add a new catch" << endl;
         cout << "2️⃣ Check your bag" << endl;
-        cout << "3️⃣ Exit" << endl;
+        cout << "3️⃣ Save bag from file" << endl;
+        cout << "4️⃣ Load bag to file" << endl;
+        cout << "5️⃣ Exit" << endl;
+
         int choice = readInt("🔍 Choose an option: ");
         cout << "=======================================" << endl;
 
@@ -46,11 +50,20 @@ void App::run() {
         } else if (choice == 2) {
             checkBag(); // Check the bag for valid catches
         } else if (choice == 3) {
+            string filename = readFileName("📂 Enter filename to save your bag (e.g. 'filename.csv'): ");
+            angler->saveToFile(filename);
+        } else if (choice == 4) {
+            string filename = readFileName("📂 Enter filename to load your bag (e.g. 'filename.csv'): ");
+            if (angler->loadFromFile(filename)) {
+                cout << "✅ Bag loaded successfully!" << endl;
+            } else {
+                cout << "❌ Failed to load bag from file." << endl;
+            }
+        } else if (choice == 5) {
             displayGoodbye();
             break; // Exit the loop
         } else {
             cout << "⚠️ Invalid choice. Please try again." << endl;
-            break;
         }
     }
 }

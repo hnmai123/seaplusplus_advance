@@ -15,6 +15,8 @@ class Angler {
 
         Bag& getBag(); // Return a pointer to the bag
         const Bag& getBag() const; // Return a const pointer to the bag
+        bool saveToFile(const string& filename) const; // Save the bag to a file
+        bool loadFromFile(const string& filename); // Load the bag from a file
 };
 
 #endif // ANGLER_H
