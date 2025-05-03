@@ -22,7 +22,7 @@ The system builds on the design patterns from Part I and demonstrates more advan
 ├── BagChecker.cpp / BagChecker.h   # Validates all contents of a Bag using engine
 ├── CSVLoader.cpp / CSVLoader.h     # Loads species rule data from CSV
 ├── SpeciesRule.h                   # Struct definition for species size and bag limit rules
-├── SeaCreature                     # Abstract base class for all sea creatures
+├── SeaCreature.cpp / SeaCreature.h # Abstract base class for all sea creatures
 ├── VertebrateCreature.cpp / .h     # Represents vertebrate species (no eggs)
 ├── InvertebrateCreature.cpp / .h   # Represents invertebrate species (may have eggs)
 ├── SeaChecker.h                    # Rule validators for each creature type
@@ -35,18 +35,29 @@ The system builds on the design patterns from Part I and demonstrates more advan
 ├── CMakeLists.txt                  # CMake build configuration file
 </pre>
 
-## 📊 UML Diagram (Updated)
+## 📊 UML Diagram
+The following UML diagram represents the updated architecture of Sea++ after the enhancements in Part III.
 
-The updated UML diagram reflects:
-
-- The new `Bag` and `BagChecker` classes
-- Composition relationship between `Bag` ◇─── `SeaCreature`
-- `Angler` owns a `Bag`
-- File I/O methods such as `saveToFile()` and `loadFromFile()`
+🧩 **Design Patterns Used**:
+- `<<facade>>` — **App**: Orchestrates user interaction, bag logic, and system flow.
+- `<<mediator>>` — **SeaPlusPlusEngine**: Mediates rule checking between sea creatures and checkers.
+- `<<interface>>` — **SeaChecker**: Shared contract for both `VertebrateChecker` and `InvertebrateChecker`.
+  
+📐 **New & Updated Components**:
+- **Angler**: Now owns a `Bag` and has methods to `saveToFile()` and `loadFromFile()`.
+- **Bag**: Holds a collection of `SeaCreature*`, using `addCreature()` and `getCreatures()`.
+- **BagChecker**: Validates all contents of a Bag via `checkBag()`, using the shared `SeaPlusPlusEngine`.
+  
+🔁 **Key Relationships**:
+- `App` uses `SeaPlusPlusEngine`, `BagChecker`, and owns an `Angler`
+- `Angler` ⟶ ◇ `Bag` (composition)
+- `Bag` ⟶ ◇ `SeaCreature*` (composite relationship)
+- `BagChecker` ⟶ uses `SeaPlusPlusEngine`
   
 ![Part2_UML drawio](https://github.com/user-attachments/assets/2eb0a10d-e4ce-4021-abe5-ca9ee3896896)
 
 ## 🚀 How to Build & Run
+Follow these steps to build and run the project manually:
 ```bash
 # Step 1: Create the build directory
 mkdir build
