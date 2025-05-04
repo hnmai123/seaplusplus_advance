@@ -54,7 +54,7 @@ The following UML diagram represents the updated architecture of Sea++ after the
 - `Bag` ⟶ ◇ `SeaCreature*` (composite relationship)
 - `BagChecker` ⟶ uses `SeaPlusPlusEngine`
   
-![Part2_UML drawio](https://github.com/user-attachments/assets/2eb0a10d-e4ce-4021-abe5-ca9ee3896896)
+![Part3_UML drawio](https://github.com/user-attachments/assets/4cf09927-6de8-4b5c-9016-2d3e653eb151)
 
 ## 🚀 How to Build & Run
 Follow these steps to build and run the project manually:
