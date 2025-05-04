@@ -25,7 +25,7 @@ The system builds on the design patterns from Part I and demonstrates more advan
 ├── SeaCreature.cpp / SeaCreature.h # Abstract base class for all sea creatures
 ├── VertebrateCreature.cpp / .h     # Represents vertebrate species (no eggs)
 ├── InvertebrateCreature.cpp / .h   # Represents invertebrate species (may have eggs)
-├── SeaChecker.h                    # Rule validators for each creature type
+├── SeaChecker.cpp / .h             # Rule validators for each creature type
 ├── InvertebrateChecker.cpp / .h    # Validates invertebrate creatures against rules
 ├── VertebrateChecker.cpp / .h      # Validates vertebrate creatures against rules
 ├── SeaPlusPlusEngine.cpp / .h      # Mediator pattern between checkers

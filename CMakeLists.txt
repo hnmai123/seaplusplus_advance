@@ -20,6 +20,7 @@ set(SOURCES
     Bag.cpp
     BagChecker.cpp
     InputHelper.cpp
+    SeaChecker.cpp
 )
 
 # Header files
